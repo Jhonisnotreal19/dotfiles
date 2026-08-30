@@ -1,0 +1,111 @@
+
+//@theme "/home/jhonisnotreal/.local/share/rofi/themes/simple-tokyonight.rasi"
+
+//@theme "/home/jhonisnotreal/.local/share/rofi/themes/simple-tokyonight.rasi"
+
+//@theme "/usr/share/rofi/themes/android_notification.rasi"
+
+//@theme "/home/jhonisnotreal/.local/share/rofi/themes/simple-tokyonight.rasi"
+
+configuration {
+	display-drun: "Applications:";
+	display-run: "Run";
+	display-window: "Windows:";
+	drun-display-format: "{icon} {name}";
+	font: "JetBrainsMono Nerd Font Medium 18";
+	modi: "drun,run,window";
+	show-icons: true;
+	icon-theme: "Papirus";
+}
+
+//@theme "/dev/null"
+
+* {
+	bg: #4f6bb9;
+	bg-alt: #444b6a;
+
+	fg: #FFFFFF;
+	fg-alt: #787c99;
+
+	background-color: @bg;
+
+	border: 0;
+	margin: 0;
+	padding: 0;
+	spacing: 0;
+
+}
+
+
+window {
+	width: 45%;
+    border: 2px;
+    border-radius: 12px;
+    padding: 5px;
+}
+    
+element {
+	padding: 12;
+
+}
+
+element selected {
+	text-color: @fg;
+
+}
+
+element-text {
+	background-color: inherit;
+	text-color: inherit;
+	vertical-align:0.5;
+
+}
+
+element-icon {
+	size: 100;
+}
+
+entry {
+	background-color: @bg-alt;
+	padding: 12;
+	text-color: @fg;
+}
+
+inputbar {
+	children: [prompt, entry];
+}
+
+listview {
+	background-color: @bg;
+	columns: 1;
+	lines: 8;
+}
+
+
+
+
+
+
+//@theme "/home/jhonisnotreal/.local/share/rofi/themes/simple-tokyonight.rasi"
+
+//@theme "/usr/share/rofi/themes/android_notification.rasi"
+
+//@theme "/usr/share/rofi/themes/Arc-Dark.rasi"
+
+//@theme "/usr/share/rofi/themes/gruvbox-dark-hard.rasi"
+
+//@theme "/usr/share/rofi/themes/gruvbox-dark.rasi"
+
+//@theme "/usr/share/rofi/themes/purple.rasi"
+
+configuration {
+    modi: "drun,run,window,filebrowser";
+    show-icons: true;
+    icon-theme: "Papirus-Dark";
+    font: "JetBrainsMono Nerd Font 12";
+}
+
+@theme "theme"
+
+
+@theme "/usr/share/rofi/themes/gruvbox-dark-hard.rasi"

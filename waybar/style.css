@@ -1,0 +1,60 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free";
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+tooltip {
+    background: rgba(0, 0, 0, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+#network,
+#bluetooth,
+#pulseaudio,
+#memory,
+#battery,
+#clock,
+#custom-power {
+    padding: 0 10px;
+    margin: 0 4px;
+    background: transparent;
+    color: #ffffff;
+}
+
+#pulseaudio {
+    min-width: 60px; /* para que se vea bien el porcentaje */
+}
+
+#workspaces button {
+    padding: 0 8px;
+    margin: 0 2px;
+    background: transparent;
+    color: #888888;          /* color normal */
+    border: none;
+}
+
+#workspaces button.active {
+    color: #ffffff;          /* color del workspace activo */
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+#workspaces button.empty {
+    color: #555555;          /* workspaces vacíos más oscuros */
+}
