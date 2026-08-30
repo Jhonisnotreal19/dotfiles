@@ -1,0 +1,9 @@
+# ~/.config/kitty/kitty.conf
+font_family      FiraCode Nerd Font
+font_size        14.0
+background_opacity 0.75
+confirm_os_window_close 0
+# Ajusta el valor en píxeles (ejemplo: 10 o 15)
+window_padding_width 10 15
+
+
