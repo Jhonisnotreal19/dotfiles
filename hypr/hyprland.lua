@@ -18,17 +18,17 @@ hl.env("HYPRCURSOR_SIZE", 24)
 hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
 
 --## PERMISSIONS ###
--- ecosystem {
 
---   enforce_permissions = 1
+hl.config({
+    ecosystem = {
+        enforce_permissions = true,
+    },
+})
 
--- }
+hl.permission({ binary = "/usr/bin/grim", type = "screencopy", mode = "allow" })
+hl.permission({ binary = "/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", type = "screencopy", mode = "allow" })
+hl.permission({ binary = "/usr/(bin|local/bin)/hyprpm", type = "plugin", mode = "allow" })
 
--- permission = /usr/(bin|local/bin)/grim, screencopy, allow
-
--- permission = /usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland, screencopy, allow
-
--- permission = /usr/(bin|local/bin)/hyprpm, plugin, allow
 
 --## LOOK AND FEEL ###
 hl.window_rule({
@@ -54,10 +54,7 @@ hl.config({
         gaps_in = 0,
         gaps_out = 0,
         border_size = 1,
-        -- https://wiki.hypr.land/Configuring/Variables/#variable-types for info about colors
-        -- Set to true enable resizing windows by clicking and dragging on borders and gaps
         resize_on_border = false,
-        -- Please see https://wiki.hypr.land/Configuring/Tearing/ before you turn this on
         allow_tearing = false,
         layout = "master",
         col = {
@@ -65,13 +62,9 @@ hl.config({
             inactive_border = "rgba(595959aa)",
         },
     },
-})
-
-hl.config({
     decoration = {
         rounding = 10,
         rounding_power = 2,
-        -- Change transparency of focused and unfocused windows
         active_opacity = 0.93,
         inactive_opacity = 1.0,
         shadow = {
@@ -80,7 +73,6 @@ hl.config({
             render_power = 3,
             color = "rgba(1a1a1aee)",
         },
-        -- https://wiki.hypr.land/Configuring/Variables/#blur
         blur = {
             enabled = true,
             size = 3,
@@ -88,16 +80,31 @@ hl.config({
             vibrancy = 0.1696,
         },
     },
+    animations = {
+        enabled = true,
+    },
+    dwindle = {
+        preserve_split = true,
+    },
+    master = {
+        --new_status = master
+    },
+    misc = {
+        force_default_wallpaper = -1,
+        disable_hyprland_logo = false,
+        focus_on_activate = true,
+    },
+    input = {
+        kb_layout = "us",
+        follow_mouse = 1,
+        sensitivity = 0,
+        touchpad = {
+            natural_scroll = true,
+        },
+    },
 })
 
 -- https://wiki.hypr.land/Configuring/Variables/#animations
-
-hl.config({
-    animations = {
-        enabled = true,
-        -- Default animations, see https://wiki.hypr.land/Configuring/Animations/ for more
-    },
-})
 hl.curve("easeOutQuint", {
     type = "bezier",
     points = { { 0.23, 1 }, { 0.32, 1 } },
@@ -118,6 +125,7 @@ hl.curve("quick", {
     type = "bezier",
     points = { { 0.15, 0 }, { 0.1, 1 } },
 })
+
 hl.animation({ leaf = "global", enabled = true, speed = 10, bezier = "default" })
 hl.animation({ leaf = "border", enabled = true, speed = 5.39, bezier = "easeOutQuint" })
 hl.animation({ leaf = "windows", enabled = true, speed = 4.79, bezier = "easeOutQuint" })
@@ -135,51 +143,11 @@ hl.animation({ leaf = "workspaces", enabled = true, speed = 1.94, bezier = "almo
 hl.animation({ leaf = "workspacesIn", enabled = true, speed = 1.21, bezier = "almostLinear", style = "fade" })
 hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
 
--- See https://wiki.hypr.land/Configuring/Dwindle-Layout/ for more
-
-hl.config({
-    dwindle = {
-        preserve_split = true,
-        -- You probably want this
-    },
-})
-
--- See https://wiki.hypr.land/Configuring/Master-Layout/ for more
-
-hl.config({
-    master = {
-        --new_status = master
-    },
-    misc = {
-        force_default_wallpaper = -1,
-        -- Set to 0 or 1 to disable the anime mascot wallpapers
-        disable_hyprland_logo = false,
-        -- If true disables the random hyprland logo / anime girl background. :(
-    },
-    input = {
-        kb_layout = "us",
-        follow_mouse = 1,
-        sensitivity = 0,
-        -- -1.0 - 1.0, 0 means no modification.
-        touchpad = {
-            natural_scroll = true,
-        },
-
-    },
-})
-
 hl.device({
     name = "epic-mouse-v1",
     sensitivity = -0.5,
 })
 
---## KEYBINDINGS ###
-
-hl.config({
-    misc = {
-        focus_on_activate = true,
-    },
-})
 
 local mainMod = "SUPER"
 
@@ -206,7 +174,7 @@ hl.bind("SUPER + up", hl.dsp.window.resize({ x = 0, y = -40, relative = true }),
 hl.bind("SUPER + down", hl.dsp.window.resize({ x = 0, y = 40, relative = true }), { repeating = true })
 hl.bind("SUPER + G", hl.dsp.window.center())
 hl.bind("SUPER + G", hl.dsp.window.resize({ x = 900, y = 750}))
-hl.bind("SUPER + N", hl.dsp.window.resize({ x = 400, y = 350}))
+hl.bind("SUPER + N", hl.dsp.window.resize({ x = 400, y = 250}))
 -- Record video
 hl.bind("SUPER + SHIFT + L", hl.dsp.exec_cmd("pkill -SIGINT wf-recorder || wf-recorder -f ~/Videos/grabacion_$(date +%Y-%m-%d_%H-%M-%s).mp4"))
 -- Redimensionar solo horizontal

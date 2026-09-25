@@ -132,8 +132,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
+alias ha='fc -ln 1'
 alias v='vim'
-alias nv='neovim'
+alias nv='nvim'
 alias c='clear'
 alias pff='poweroff'
 alias e='exit'
@@ -144,11 +145,13 @@ alias documents='cd Documents'
 alias diskpercent='df -h'
 alias partitions='sudo fdisk -l'
 alias last='find -mtime -1'
-alias update='_ pacman -Syu'
+alias update='sudo pacman -Syu'
+alias aupd='sudo pacman -Syyu'
 #alias upgrade='sudo apt upgrade'
 alias is='_ pacman -S '
 alias py='python3'
-alias config='v .zshrc'
+alias z='nv .zshrc'
+alias hpr='nv .config/hypr/hyprland.lua'
 alias matrix='unimatrix'
 alias treee='tree -L 1'
 alias zen='flatpak run io.github.zen_browser.zen'
@@ -167,8 +170,10 @@ alias rick="curl ascii.live/rick"
 alias coin="curl ascii.live/coin"
 alias anime="ani-cli"
 alias light="gammastep -O 3000"
-alias conf="v .config/hypr/hyprland.conf"
-
+alias lai="ollama run qwen2.5:3b"
+alias ai="ollama run dolphin-llama3:8b"
+alias reload="hyprctl reload"
+alias hprerrors="hyprctl configerrors"
 
 autoload -Uz calc
 
