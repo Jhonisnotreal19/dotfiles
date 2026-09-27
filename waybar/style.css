@@ -16,6 +16,16 @@ tooltip {
     background: rgba(0, 0, 0, 1);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
+    font-size: 14px;
+}
+
+window#waybar tooltip {
+    font-size: 14px;
+}
+
+#clock:hover tooltip,
+tooltip label {
+    font-size: 28px;
 }
 
 #network,
@@ -25,26 +35,31 @@ tooltip {
 #battery,
 #clock,
 #custom-power {
-    padding: 0 10px;
+    padding: 0 5px;
     margin: 0 4px;
     background: transparent;
     color: #ffffff;
 }
 
+#network {
+    padding: 0 30px;
+    margin: 0 5px;
+}
+
 #pulseaudio {
-    min-width: 60px; /* para que se vea bien el porcentaje */
+    min-width: 60px;
 }
 
 #workspaces button {
     padding: 0 8px;
     margin: 0 2px;
     background: transparent;
-    color: #888888;          /* color normal */
+    color: #888888;
     border: none;
 }
 
 #workspaces button.active {
-    color: #ffffff;          /* color del workspace activo */
+    color: #ffffff;
     background: rgba(255, 255, 255, 0.15);
     border-radius: 6px;
     font-weight: bold;
@@ -56,5 +71,5 @@ tooltip {
 }
 
 #workspaces button.empty {
-    color: #555555;          /* workspaces vacíos más oscuros */
+    color: #555555;
 }
