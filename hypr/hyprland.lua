@@ -7,8 +7,8 @@ hl.monitor({
 
 local terminal = "kitty"
 local fileManager = "dolphin"
-local menu = "rofi -show drun"
-local browser = "firefox"
+local menu = "wofi -show drun"
+local browser = "app.zen_browser.zen"
 local editor = "nvim"
 
 --## ENVIRONMENT VARIABLES ###
@@ -46,6 +46,14 @@ hl.window_rule({
     },
     float = true,
     size = { 500, 350 },
+    center = true,
+})
+
+hl.window_rule({
+    name  = "wofi_size",
+    match = { class = "^(wofi)$" },
+    float = true,
+    size = { 500, 100 },
     center = true,
 })
 
@@ -151,17 +159,24 @@ hl.device({
 
 local mainMod = "SUPER"
 
-hl.bind(mainMod .. " + " .. "Q", hl.dsp.exec_cmd("kitty"))
+hl.bind(mainMod .. " + " .. "Q", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + " .. "W", hl.dsp.window.close())
-hl.bind(mainMod .. " + " .. "O", hl.dsp.exit())
-hl.bind(mainMod .. " + " .. "E", hl.dsp.exec_cmd("dolphin"))
-hl.bind(mainMod .. " + " .. "V", hl.dsp.window.fullscreen({ mode = 'maximized' })) hl.bind(mainMod .. " + " .. "R", hl.dsp.exec_cmd("rofi -show drun"))
+--hl.bind(mainMod .. " + " .. 6, hl.dsp.exit())
+hl.bind(mainMod .. " + " .. "E", hl.dsp.exec_cmd(fileManager))
+hl.bind(mainMod .. " + " .. "V", hl.dsp.window.fullscreen({ mode = 'maximized' })) hl.bind(mainMod .. " + " .. "R", hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("rofi -show drun"))
 hl.bind(mainMod .. " + " .. "P", hl.dsp.window.pin())
 hl.bind(mainMod .. " + " .. "L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind(mainMod .. " + " .. "A", hl.dsp.exec_cmd("firefox"))
+hl.bind(mainMod .. " + " .. "O",  hl.dsp.exec_cmd("okular"))
 
 hl.bind(mainMod .. " + Tab", function()
-    hl.dispatch(hl.dsp.window.cycle_next())
+    hl.dispatch(hl.dsp.window.cycle_next({ next = true }))
+    hl.dispatch(hl.dsp.window.bring_to_top())
+end)
+
+hl.bind(mainMod .. " + SHIFT + Tab", function()
+    hl.dispatch(hl.dsp.window.cycle_next({ next = false }))
     hl.dispatch(hl.dsp.window.bring_to_top())
 end)
 
@@ -175,6 +190,9 @@ hl.bind("SUPER + down", hl.dsp.window.resize({ x = 0, y = 40, relative = true })
 hl.bind("SUPER + G", hl.dsp.window.center())
 hl.bind("SUPER + G", hl.dsp.window.resize({ x = 900, y = 750}))
 hl.bind("SUPER + N", hl.dsp.window.resize({ x = 400, y = 250}))
+hl.bind("SUPER + B", hl.dsp.window.move({ x = 4, y = 25 }))
+hl.bind("SUPER + SHIFT + B", hl.dsp.window.move({ x = 770, y = 440 }))
+hl.bind("F11", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 -- Record video
 hl.bind("SUPER + SHIFT + L", hl.dsp.exec_cmd("pkill -SIGINT wf-recorder || wf-recorder -f ~/Videos/grabacion_$(date +%Y-%m-%d_%H-%M-%s).mp4"))
 -- Redimensionar solo horizontal
@@ -231,13 +249,14 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true 
 
 -- Autostart
 hl.on("hyprland.start", function()
+    hl.exec_cmd("noctalia")
     hl.exec_cmd("brightnessctl s 200")
     hl.exec_cmd("nm-applet --indicator")
-    hl.exec_cmd("waybar")
+    --hl.exec_cmd("waybar")
     hl.exec_cmd("app.zen_browser.zen")
     hl.exec_cmd("dunst")
     hl.exec_cmd("gammastep")
-    hl.exec_cmd("swaybg -i Downloads/bg/starry-skies-and-cozy-nights-ge-1920x1200.jpg")
+    --hl.exec_cmd("swaybg -i Pictures/bg/starry-skies-and-cozy-nights-ge-1920x1200.jpg")
     hl.exec_cmd("sh -c 'UPPER_LIMIT=80; LOWER_LIMIT=20; while true; do LEVEL=$(cat /sys/class/power_supply/BAT0/capacity); STATUS=$(cat /sys/class/power_supply/BAT0/status); if [ \"$LEVEL\" -ge \"$UPPER_LIMIT\" ] && [ \"$STATUS\" = \"Charging\" ]; then dunstify -u critical -i battery-full-charged \"Batería al $LEVEL%\" \"Desconecta el cargador\"; elif [ \"$LEVEL\" -le \"$LOWER_LIMIT\" ] && [ \"$STATUS\" = \"Discharging\" ]; then dunstify -u critical -i battery-caution \"Batería Baja\" \"Nivel al $LEVEL%. Conecta el cargador\"; fi; sleep 120; done'")
     hl.exec_cmd("bash -c 'while true; do bat_lvl=$(cat /sys/class/power_supply/BAT0/capacity); bat_st=$(cat /sys/class/power_supply/BAT0/status); if [ \"$bat_lvl\" -le 10 ] && [ \"$bat_st\" = \"Discharging\" ]; then notify-send -u critical \"Batería Baja\" \"Se te olvidó conectar el cargador\"; elif [ \"$bat_lvl\" -ge 90 ] && [ \"$bat_st\" = \"Charging\" ]; then notify-send -u normal \"Batería Llena\" \"Se te olvidó desconectar el cargador\"; fi; sleep 60; done'")
     hl.exec_cmd("sleep $(( ( $(date -d \"20:00\" +%s) - $(date +%s)+ 86400 )% 86400 )) && dunstify \"Recordatorio\" \"Ya son las 8:00 PM\" -i clock")
