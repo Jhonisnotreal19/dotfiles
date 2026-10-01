@@ -161,14 +161,16 @@ local mainMod = "SUPER"
 
 hl.bind(mainMod .. " + " .. "Q", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + " .. "W", hl.dsp.window.close())
---hl.bind(mainMod .. " + " .. 6, hl.dsp.exit())
 hl.bind(mainMod .. " + " .. "E", hl.dsp.exec_cmd(fileManager))
-hl.bind(mainMod .. " + " .. "V", hl.dsp.window.fullscreen({ mode = 'maximized' })) hl.bind(mainMod .. " + " .. "R", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("rofi -show drun"))
+hl.bind("SUPER + V", hl.dsp.window.resize({ x = 1275, y = 768 }))
+hl.bind("SUPER + V", hl.dsp.window.move({ x = 0, y = 0 }))
+hl.bind("SUPER + V", hl.dsp.window.center())
+hl.bind(mainMod .. " + " .. "D", hl.dsp.exec_cmd("rofi -show drun"))
 hl.bind(mainMod .. " + " .. "P", hl.dsp.window.pin())
-hl.bind(mainMod .. " + " .. "L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind(mainMod .. " + " .. "A", hl.dsp.exec_cmd("firefox"))
 hl.bind(mainMod .. " + " .. "O",  hl.dsp.exec_cmd("okular"))
+-- Oculatar ventanas y reaparecerlas
+hl.bind(mainMod .. " + SPACE", hl.dsp.workspace.toggle_special("minimized"))
 
 hl.bind(mainMod .. " + Tab", function()
     hl.dispatch(hl.dsp.window.cycle_next({ next = true }))
@@ -197,12 +199,12 @@ hl.bind("F11", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 hl.bind("SUPER + SHIFT + L", hl.dsp.exec_cmd("pkill -SIGINT wf-recorder || wf-recorder -f ~/Videos/grabacion_$(date +%Y-%m-%d_%H-%M-%s).mp4"))
 -- Redimensionar solo horizontal
 hl.bind("SUPER + left", hl.dsp.window.resize({ x = -40, y = 0, relative = true }), { repeating = true })
+hl.bind("SUPER + right", hl.dsp.window.resize({ x = 40, y = 0, relative = true }), { repeating = true })
 -- Mover ventana con el teclado
 hl.bind("SUPER + SHIFT + bracketleft",  hl.dsp.window.move({ x = -40, y = 0,  relative = true }), { repeating = true })
 hl.bind("SUPER + SHIFT + bracketright", hl.dsp.window.move({ x = 40,  y = 0,  relative = true }), { repeating = true })
 hl.bind("SUPER + SHIFT + semicolon",    hl.dsp.window.move({ x = 0,   y = -40, relative = true }), { repeating = true })
 hl.bind("SUPER + SHIFT + apostrophe",   hl.dsp.window.move({ x = 0,   y = 40,  relative = true }), { repeating = true })
-hl.bind("SUPER + right", hl.dsp.window.resize({ x = 40, y = 0, relative = true }), { repeating = true })
 
 -- Volumen de sonido
 hl.bind(mainMod .. " + " .. "K", hl.dsp.exec_cmd("amixer set Master 25%+"))
@@ -233,7 +235,6 @@ hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 5, hl.dsp.window.move({ workspac
 -- Move/resize windows with mainMod + LMB/RMB and dragging
 
 hl.bind(mainMod .. " + " .. "mouse:272", hl.dsp.window.drag(), { mouse = true })
--- hl.bind("mouse:272", hl.dsp.window.bring_to_top(), { non_consuming = true })
 hl.bind(mainMod .. " + " .. "mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Laptop multimedia keys for volume and LCD brightness
@@ -261,4 +262,8 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("bash -c 'while true; do bat_lvl=$(cat /sys/class/power_supply/BAT0/capacity); bat_st=$(cat /sys/class/power_supply/BAT0/status); if [ \"$bat_lvl\" -le 10 ] && [ \"$bat_st\" = \"Discharging\" ]; then notify-send -u critical \"Batería Baja\" \"Se te olvidó conectar el cargador\"; elif [ \"$bat_lvl\" -ge 90 ] && [ \"$bat_st\" = \"Charging\" ]; then notify-send -u normal \"Batería Llena\" \"Se te olvidó desconectar el cargador\"; fi; sleep 60; done'")
     hl.exec_cmd("sleep $(( ( $(date -d \"20:00\" +%s) - $(date +%s)+ 86400 )% 86400 )) && dunstify \"Recordatorio\" \"Ya son las 8:00 PM\" -i clock")
     hl.exec_cmd("sleep $(( ( $(date -d \"20:30\" +%s) - $(date +%s)+ 86400 )% 86400 )) && dunstify \"Recordatorio\" \"Ya son las 8:30 PM\" -i clock")
+end)
+
+hl.on("window.active", function(w)
+    hl.dispatch(hl.dsp.window.bring_to_top({ window = w }))
 end)
