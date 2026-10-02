@@ -162,6 +162,8 @@ local mainMod = "SUPER"
 hl.bind(mainMod .. " + " .. "Q", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + " .. "W", hl.dsp.window.close())
 hl.bind(mainMod .. " + " .. "E", hl.dsp.exec_cmd(fileManager))
+hl.bind(mainMod .. " + " .. "J", hl.dsp.window.resize({ x = 500, y = 350}))
+hl.bind(mainMod .. " + " .. "J", hl.dsp.window.center())
 hl.bind("SUPER + V", hl.dsp.window.resize({ x = 1275, y = 768 }))
 hl.bind("SUPER + V", hl.dsp.window.move({ x = 0, y = 0 }))
 hl.bind("SUPER + V", hl.dsp.window.center())
@@ -170,6 +172,7 @@ hl.bind(mainMod .. " + " .. "P", hl.dsp.window.pin())
 hl.bind(mainMod .. " + " .. "A", hl.dsp.exec_cmd("firefox"))
 hl.bind(mainMod .. " + " .. "O",  hl.dsp.exec_cmd("okular"))
 -- Oculatar ventanas y reaparecerlas
+hl.bind(mainMod .. " + SHIFT + SPACE", hl.dsp.window.move({ workspace = "special:minimized" }))
 hl.bind(mainMod .. " + SPACE", hl.dsp.workspace.toggle_special("minimized"))
 
 hl.bind(mainMod .. " + Tab", function()

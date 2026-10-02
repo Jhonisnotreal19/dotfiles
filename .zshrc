@@ -174,6 +174,10 @@ alias lai="ollama run qwen2.5:3b"
 alias ai="ollama run dolphin-llama3:8b"
 alias reload="hyprctl reload"
 alias hprerrors="hyprctl configerrors"
+alias servs="systemctl list-units | grep service"
+alias camera="ffplay /dev/video0"
+alias desactivateCamera="sudo modprobe -r uvcvideo"
+alias reactivateCamera="sudo modprobe uvcvideo"
 
 autoload -Uz calc
 
