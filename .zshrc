@@ -129,7 +129,7 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
+alias zshconfig="nv ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 alias ha='fc -ln 1'
@@ -156,7 +156,8 @@ alias matrix='unimatrix'
 alias treee='tree -L 1'
 alias zen='flatpak run io.github.zen_browser.zen'
 alias battinfo='acpi -b'
-alias uninstl="_ apt remove"
+#alias uninstl="_ apt remove"
+alias uninstl="_ pacman -R"
 alias xct="chmod +x"
 alias allin="chmod 777"
 alias flatpak_free="_ rm -rf /var/lib/flatpak/repo/tmp/*"
@@ -178,6 +179,7 @@ alias servs="systemctl list-units | grep service"
 alias camera="ffplay /dev/video0"
 alias desactivateCamera="sudo modprobe -r uvcvideo"
 alias reactivateCamera="sudo modprobe uvcvideo"
+alias packages="pacman -Qeq > pkglist.txt"
 
 autoload -Uz calc
 

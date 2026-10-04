@@ -6,8 +6,8 @@ hl.monitor({
 })
 
 local terminal = "kitty"
-local fileManager = "dolphin"
-local menu = "wofi -show drun"
+local fileManager = "kitty -e yazi"
+local menu = "rofi -show drun"
 local browser = "app.zen_browser.zen"
 local editor = "nvim"
 
@@ -159,6 +159,9 @@ hl.device({
 
 local mainMod = "SUPER"
 
+hl.bind(mainMod .. " + " .. "C", hl.dsp.exec_cmd("flatpak run app.zen_browser.zen --new-window https://www.southpark.lat/seasons/south-park"))
+hl.bind(mainMod .. " + " .. "F", hl.dsp.exec_cmd("kitty zsh -ic 'lai; exec zsh'"))
+hl.bind(mainMod .. " + " .. "RETURN", hl.dsp.exec_cmd("kitty zsh -ic 'hpr; exec zsh'"))
 hl.bind(mainMod .. " + " .. "Q", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + " .. "W", hl.dsp.window.close())
 hl.bind(mainMod .. " + " .. "E", hl.dsp.exec_cmd(fileManager))
@@ -167,7 +170,7 @@ hl.bind(mainMod .. " + " .. "J", hl.dsp.window.center())
 hl.bind("SUPER + V", hl.dsp.window.resize({ x = 1275, y = 768 }))
 hl.bind("SUPER + V", hl.dsp.window.move({ x = 0, y = 0 }))
 hl.bind("SUPER + V", hl.dsp.window.center())
-hl.bind(mainMod .. " + " .. "D", hl.dsp.exec_cmd("rofi -show drun"))
+hl.bind(mainMod .. " + " .. "D", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + " .. "P", hl.dsp.window.pin())
 hl.bind(mainMod .. " + " .. "A", hl.dsp.exec_cmd("firefox"))
 hl.bind(mainMod .. " + " .. "O",  hl.dsp.exec_cmd("okular"))
@@ -269,4 +272,4 @@ end)
 
 hl.on("window.active", function(w)
     hl.dispatch(hl.dsp.window.bring_to_top({ window = w }))
-end)
+end)        
