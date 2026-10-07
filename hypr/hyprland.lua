@@ -159,6 +159,7 @@ hl.device({
 
 local mainMod = "SUPER"
 
+hl.bind(mainMod .. " + " .. "8", hl.dsp.exec_cmd("kitty zsh -ic 'nv; exec zsh'"))
 hl.bind(mainMod .. " + " .. "C", hl.dsp.exec_cmd("flatpak run app.zen_browser.zen --new-window https://www.southpark.lat/seasons/south-park"))
 hl.bind(mainMod .. " + " .. "F", hl.dsp.exec_cmd("kitty zsh -ic 'lai; exec zsh'"))
 hl.bind(mainMod .. " + " .. "RETURN", hl.dsp.exec_cmd("kitty zsh -ic 'hpr; exec zsh'"))
@@ -172,7 +173,7 @@ hl.bind("SUPER + V", hl.dsp.window.move({ x = 0, y = 0 }))
 hl.bind("SUPER + V", hl.dsp.window.center())
 hl.bind(mainMod .. " + " .. "D", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + " .. "P", hl.dsp.window.pin())
-hl.bind(mainMod .. " + " .. "A", hl.dsp.exec_cmd("firefox"))
+--hl.bind(mainMod .. " + " .. "A", hl.dsp.exec_cmd("firefox"))
 hl.bind(mainMod .. " + " .. "O",  hl.dsp.exec_cmd("okular"))
 -- Oculatar ventanas y reaparecerlas
 hl.bind(mainMod .. " + SHIFT + SPACE", hl.dsp.window.move({ workspace = "special:minimized" }))
@@ -227,16 +228,12 @@ hl.bind(mainMod .. " + " .. "X", hl.dsp.exec_cmd("brightnessctl s 1%-"))
 hl.bind(mainMod .. " + " .. 1, hl.dsp.focus({ workspace = 1 }))
 hl.bind(mainMod .. " + " .. 2, hl.dsp.focus({ workspace = 2 }))
 hl.bind(mainMod .. " + " .. 3, hl.dsp.focus({ workspace = 3 }))
-hl.bind(mainMod .. " + " .. 4, hl.dsp.focus({ workspace = 4 }))
-hl.bind(mainMod .. " + " .. 5, hl.dsp.focus({ workspace = 5 }))
 
 -- Move active window to a workspace with mainMod + SHIFT + [0-5]
 
 hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 1, hl.dsp.window.move({ workspace = 1 }))
 hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 2, hl.dsp.window.move({ workspace = 2 }))
 hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 3, hl.dsp.window.move({ workspace = 3 }))
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 4, hl.dsp.window.move({ workspace = 4 }))
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 5, hl.dsp.window.move({ workspace = 5 }))
 
 -- Move/resize windows with mainMod + LMB/RMB and dragging
 
@@ -262,7 +259,7 @@ hl.on("hyprland.start", function()
     --hl.exec_cmd("waybar")
     hl.exec_cmd("app.zen_browser.zen")
     hl.exec_cmd("dunst")
-    hl.exec_cmd("gammastep")
+    hl.exec_cmd("hyprsunset -t 3000")
     --hl.exec_cmd("swaybg -i Pictures/bg/starry-skies-and-cozy-nights-ge-1920x1200.jpg")
     hl.exec_cmd("sh -c 'UPPER_LIMIT=80; LOWER_LIMIT=20; while true; do LEVEL=$(cat /sys/class/power_supply/BAT0/capacity); STATUS=$(cat /sys/class/power_supply/BAT0/status); if [ \"$LEVEL\" -ge \"$UPPER_LIMIT\" ] && [ \"$STATUS\" = \"Charging\" ]; then dunstify -u critical -i battery-full-charged \"Batería al $LEVEL%\" \"Desconecta el cargador\"; elif [ \"$LEVEL\" -le \"$LOWER_LIMIT\" ] && [ \"$STATUS\" = \"Discharging\" ]; then dunstify -u critical -i battery-caution \"Batería Baja\" \"Nivel al $LEVEL%. Conecta el cargador\"; fi; sleep 120; done'")
     hl.exec_cmd("bash -c 'while true; do bat_lvl=$(cat /sys/class/power_supply/BAT0/capacity); bat_st=$(cat /sys/class/power_supply/BAT0/status); if [ \"$bat_lvl\" -le 10 ] && [ \"$bat_st\" = \"Discharging\" ]; then notify-send -u critical \"Batería Baja\" \"Se te olvidó conectar el cargador\"; elif [ \"$bat_lvl\" -ge 90 ] && [ \"$bat_st\" = \"Charging\" ]; then notify-send -u normal \"Batería Llena\" \"Se te olvidó desconectar el cargador\"; fi; sleep 60; done'")

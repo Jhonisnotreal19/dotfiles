@@ -180,8 +180,19 @@ alias camera="ffplay /dev/video0"
 alias desactivateCamera="sudo modprobe -r uvcvideo"
 alias reactivateCamera="sudo modprobe uvcvideo"
 alias packages="pacman -Qeq > pkglist.txt"
+alias mip="curl ipinfo.io"
+alias misbinds="hyprctl binds | grep -E '^\s*key:'"
 
 autoload -Uz calc
+
+# Añade una línea en blanco antes de cada prompt (excepto el primero)
+function precmd() {
+    if [ -z "$NEW_LINE_BEFORE_PROMPT" ]; then
+        NEW_LINE_BEFORE_PROMPT=1
+    elif [ "$NEW_LINE_BEFORE_PROMPT" -eq 1 ]; then
+        echo ""
+    fi
+}
 
 
 # Para Linux con nmcli
@@ -221,3 +232,8 @@ export PATH="$QLTY_INSTALL/bin:$PATH"
 
 # Esto resetea los colores pero mantiene las letras de colores, quitando el fondo (bg)
 export LS_COLORS='ow=01;34:di=01;34:pi=40;33:so=01;35:bd=40;33;01'
+# Prompt minimalista: solo un '>' (o '#' si eres root)
+PROMPT='%~ > '
+
+# Created by `pipx` on 2026-10-06 22:42:00
+export PATH="$PATH:/home/jhonisnotreal/.local/bin"
