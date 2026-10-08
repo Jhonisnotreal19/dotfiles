@@ -21,3 +21,5 @@
 ` yay -S ani-cli nerd-fonts-hack nerd-font-jetbrains-mono lua libcava mullvad-vpn npm  `
 
 ` git clone https://aur.archlinux.org/yay.git `
+
+sddm:   https://github.com/Keyitdev/sddm-astronaut-theme
