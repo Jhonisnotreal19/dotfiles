@@ -25,6 +25,7 @@ hl.config({
     },
 })
 
+hl.permission({ binary = "/usr/bin/noctalia", type = "screencopy", mode = "allow" })
 hl.permission({ binary = "/usr/bin/grim", type = "screencopy", mode = "allow" })
 hl.permission({ binary = "/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", type = "screencopy", mode = "allow" })
 hl.permission({ binary = "/usr/(bin|local/bin)/hyprpm", type = "plugin", mode = "allow" })
@@ -168,7 +169,7 @@ hl.bind(mainMod .. " + " .. "W", hl.dsp.window.close())
 hl.bind(mainMod .. " + " .. "E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + " .. "J", hl.dsp.window.resize({ x = 500, y = 350}))
 hl.bind(mainMod .. " + " .. "J", hl.dsp.window.center())
-hl.bind("SUPER + V", hl.dsp.window.resize({ x = 1275, y = 768 }))
+hl.bind("SUPER + V", hl.dsp.window.resize({ x = 1275, y = 760 }))
 hl.bind("SUPER + V", hl.dsp.window.move({ x = 0, y = 0 }))
 hl.bind("SUPER + V", hl.dsp.window.center())
 hl.bind(mainMod .. " + " .. "D", hl.dsp.exec_cmd(menu))
@@ -191,16 +192,16 @@ end)
 
 hl.bind(mainMod .. " + " .. "Z", hl.dsp.exec_cmd("flatpak run app.zen_browser.zen"))
 -- Screenshots
-hl.bind("SUPER + M", hl.dsp.exec_cmd("grim ~/Pictures/screenshot_$(date +%Y-%m-%d_%H-%M-%s).png"))
-hl.bind("SUPER + SHIFT + M", hl.dsp.exec_cmd("grim -g \"$(slurp)\" ~/Pictures/screenshot_$(date +%Y-%m-%d_%H-%M-%s).png"))
+--hl.bind("SUPER + M", hl.dsp.exec_cmd("grim ~/Pictures/screenshot_$(date +%Y-%m-%d_%H-%M-%s).png"))
+--hl.bind("SUPER + SHIFT + M", hl.dsp.exec_cmd("grim -g \"$(slurp)\" ~/Pictures/screenshot_$(date +%Y-%m-%d_%H-%M-%s).png"))
 -- Windows size & resize
 hl.bind("SUPER + up", hl.dsp.window.resize({ x = 0, y = -40, relative = true }), { repeating = true })
 hl.bind("SUPER + down", hl.dsp.window.resize({ x = 0, y = 40, relative = true }), { repeating = true })
 hl.bind("SUPER + G", hl.dsp.window.center())
 hl.bind("SUPER + G", hl.dsp.window.resize({ x = 900, y = 750}))
 hl.bind("SUPER + N", hl.dsp.window.resize({ x = 400, y = 250}))
-hl.bind("SUPER + B", hl.dsp.window.move({ x = 4, y = 25 }))
-hl.bind("SUPER + SHIFT + B", hl.dsp.window.move({ x = 770, y = 440 }))
+hl.bind("SUPER + B", hl.dsp.window.move({ x = 4, y = 40 }))
+hl.bind("SUPER + SHIFT + B", hl.dsp.window.move({ x = 370, y = 40 }))
 hl.bind("F11", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 -- Record video
 hl.bind("SUPER + SHIFT + L", hl.dsp.exec_cmd("pkill -SIGINT wf-recorder || wf-recorder -f ~/Videos/grabacion_$(date +%Y-%m-%d_%H-%M-%s).mp4"))
