@@ -114,6 +114,14 @@ xdg-user-dirs-update
 hyprsunset -t 2500k
 flatpak install flathub app.zen_browser.zen
   
+hyprland
+sudo pacman -S wayland wl-clipboard acpi 
+acpi -b
+flatpak run app.zen_browser.zen
+sudo pacman -S cmake dunst cmatrix gcc sddm curl okular exiftool gimp wifite macchanger npm yazi llama-cpp zsh zsh-autosuggestions audit lynis rkhunter ufw 
+git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
+sudo usermod -s /usr/bin/zsh $USER
+
 
 
 ` sudo pacman -S wayland hyprland cmake yay paru wget dunst efibootmgr kitty hyprlock dolphin keepass htop neovim vim waybar rofi gcc matrix sddm git wget fastfetch curl firefox vlc spectacle power-profiles-daemon cargo clany tmux gwenview base-devel android-tools ntfs-3g linux-headers exfatprogs hyprsunset`
