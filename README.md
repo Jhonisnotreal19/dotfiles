@@ -91,6 +91,22 @@ Remove the USB drive when it turns off.
 sudo pacman -Syu
 sudo pacman -S hyprland kitty neovim git base-devel mesa vulkan-intel intel-media-driver xdg-desktop-portal-hyprland pipewire pipewire-pulse wireplumber polkit-kde-agent qt5-wayland qt6-wayland ttf-jetbrains-mono-nerd wl-clipboard brightnessctl hyprsunset
 
+clone this repo
+
+sudo pacman -Syu
+nmcli device show
+sudo systemctl enable --now NetworkManager
+nmcli radio wifi on
+nmcli device wifi list
+nmcli device wifi connect "" password ""
+sudo pacman -Syu
+sudo pacman -S hyprland kitty neovim git base-devel mesa vulkan-intel intel-media-driver xdg-desktop-portal-hyprland pipewire pipewire-pulse wireplumber polkit-kde-agent qt5-wayland qt6-wayland ttf-jetbrains-mono-nerd hyprsunset 
+git clone https://aur.archlinux.org/yay.git
+cd yay/
+makepkg -si
+yay -S noctalia
+
+clone this repo
 
 ` sudo pacman -S wayland hyprland cmake yay paru wget dunst efibootmgr kitty hyprlock dolphin keepass htop neovim vim waybar rofi gcc matrix sddm git wget fastfetch curl firefox vlc spectacle power-profiles-daemon cargo clany tmux gwenview base-devel android-tools ntfs-3g linux-headers exfatprogs hyprsunset`
 
