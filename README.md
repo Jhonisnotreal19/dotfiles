@@ -127,8 +127,14 @@ is grim ollama
 yay -S blackarch-helper 
 yay -S ani-cli nerd-fonts-hack lua libcava npm
 ollama run R4C3R/qwen2.5-3b-heretic
-is playerctl mpv bluez bluez-utils audacious  
+is playerctl mpv bluez bluez-utils audacious mpv-mpris unzip wf-recorder timeshift
 ollama run maternion/minicpm5-heretic:2b
+
+sudo EDITOR=nvim visudo
+
+sudo pacman -S gpu-screen-recorder
+
+sudo timeshift-launcher
 
 
 
