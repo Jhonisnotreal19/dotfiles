@@ -56,15 +56,35 @@ mount --mkdir /dev/nvme0n1p1 /mnt/boot
 mount --mkdir /dev/nvme0n1p4 /mnt/home
 swapon /dev/nvme0n1p2
 
+ping -c 3 archlinux.org
 
+pacstrap -K /mnt base linux linux-lts linux-firmware networkmanager neovim 
+sudo grub efibootmgr
 
+genfstab -U /mnt >> /mnt/etc/fstab
+arch-chroot /mnt
 
+ln -sf /usr/share/zoneinfo/America/Mexico_City /etc/localtime
+hwclock --systohc
+nvim /etc/locale.gen        # uncomment es_MX.UTF-8 UTF-8 y en_US.UTF-8 UTF-8
+locale-gen
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
+echo "KEYMAP=en_US.UTF-8" > /etc/vconsole.conf
+echo "host" > /etc/hostname
+passwd
+useradd -mG wheel username
+passwd *****
+EDITOR=nvim visudo          # uncomment %wheel ALL=(ALL:ALL) ALL
+systemctl enable NetworkManager
 
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+grub-mkconfig -o /boot/grub/grub.cfg
 
+exit
+umount -R /mnt
+reboot
 
-
-
-
+Remove the USB drive when it turns off.
 
 ` sudo pacman -S wayland hyprland cmake yay paru wget dunst efibootmgr kitty hyprlock dolphin keepass htop neovim vim waybar rofi gcc matrix sddm git wget fastfetch curl firefox vlc spectacle power-profiles-daemon cargo clany tmux gwenview base-devel android-tools ntfs-3g linux-headers exfatprogs hyprsunset`
 
