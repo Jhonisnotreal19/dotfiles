@@ -122,6 +122,14 @@ sudo pacman -S cmake dunst cmatrix gcc sddm curl okular exiftool gimp wifite mac
 git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
 sudo usermod -s /usr/bin/zsh $USER
 
+is grim ollama 
+
+yay -S blackarch-helper 
+yay -S ani-cli nerd-fonts-hack lua libcava npm
+ollama run R4C3R/qwen2.5-3b-heretic
+is playerctl mpv bluez bluez-utils audacious  
+ollama run maternion/minicpm5-heretic:2b
+
 
 
 ` sudo pacman -S wayland hyprland cmake yay paru wget dunst efibootmgr kitty hyprlock dolphin keepass htop neovim vim waybar rofi gcc matrix sddm git wget fastfetch curl firefox vlc spectacle power-profiles-daemon cargo clany tmux gwenview base-devel android-tools ntfs-3g linux-headers exfatprogs hyprsunset`
