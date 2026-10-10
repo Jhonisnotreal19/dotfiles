@@ -1,0 +1,274 @@
+hl.monitor({
+    output   = "",
+    mode     = "preferred",
+    position = "auto",
+    scale    = "auto",
+})
+
+local terminal = "kitty"
+local fileManager = "kitty -e yazi"
+local menu = "rofi -show drun"
+local browser = "app.zen_browser.zen"
+local editor = "nvim"
+
+--## ENVIRONMENT VARIABLES ###
+
+hl.env("XCURSOR_SIZE", 24)
+hl.env("HYPRCURSOR_SIZE", 24)
+hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
+
+--## PERMISSIONS ###
+
+hl.config({
+    ecosystem = {
+        enforce_permissions = true,
+    },
+})
+
+hl.permission({ binary = "/usr/bin/gpu-screen-recorder", type = "screencopy", mode = "allow" })
+hl.permission({ binary = "/usr/bin/noctalia", type = "screencopy", mode = "allow" })
+hl.permission({ binary = "/usr/bin/grim", type = "screencopy", mode = "allow" })
+hl.permission({ binary = "/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", type = "screencopy", mode = "allow" })
+hl.permission({ binary = "/usr/(bin|local/bin)/hyprpm", type = "plugin", mode = "allow" })
+
+
+--## LOOK AND FEEL ###
+hl.window_rule({
+    name  = "float_on_80",
+    match = { class = ".*" },
+    float = true,
+    size = { 900, 750 },
+    center = true,
+})
+
+hl.window_rule({
+    name  = "float_on_81",
+    match = {
+        class = "^(kitty)$",
+    },
+    float = true,
+    size = { 500, 350 },
+    center = true,
+})
+
+hl.window_rule({
+    name  = "wofi_size",
+    match = { class = "^(wofi)$" },
+    float = true,
+    size = { 500, 100 },
+    center = true,
+})
+
+hl.config({
+    general = {
+        gaps_in = 0,
+        gaps_out = 0,
+        border_size = 1,
+        resize_on_border = false,
+        allow_tearing = false,
+        layout = "master",
+        col = {
+            active_border = { colors = { "rgba(33ccffee)", "rgba(00ff99ee)" }, angle = 45 },
+            inactive_border = "rgba(595959aa)",
+        },
+    },
+    decoration = {
+        rounding = 10,
+        rounding_power = 2,
+        active_opacity = 0.93,
+        inactive_opacity = 1.0,
+        shadow = {
+            enabled = true,
+            range = 4,
+            render_power = 3,
+            color = "rgba(1a1a1aee)",
+        },
+        blur = {
+            enabled = true,
+            size = 3,
+            passes = 1,
+            vibrancy = 0.1696,
+        },
+    },
+    animations = {
+        enabled = true,
+    },
+    dwindle = {
+        preserve_split = true,
+    },
+    master = {
+        --new_status = master
+    },
+    misc = {
+        force_default_wallpaper = -1,
+        disable_hyprland_logo = false,
+        focus_on_activate = true,
+    },
+    input = {
+        kb_layout = "us",
+        follow_mouse = 1,
+        sensitivity = 0,
+        touchpad = {
+            natural_scroll = true,
+        },
+    },
+})
+
+-- https://wiki.hypr.land/Configuring/Variables/#animations
+hl.curve("easeOutQuint", {
+    type = "bezier",
+    points = { { 0.23, 1 }, { 0.32, 1 } },
+})
+hl.curve("easeInOutCubic", {
+    type = "bezier",
+    points = { { 0.65, 0.05 }, { 0.36, 1 } },
+})
+hl.curve("linear", {
+    type = "bezier",
+    points = { { 0, 0 }, { 1, 1 } },
+})
+hl.curve("almostLinear", {
+    type = "bezier",
+    points = { { 0.5, 0.5 }, { 0.75, 1.0 } },
+})
+hl.curve("quick", {
+    type = "bezier",
+    points = { { 0.15, 0 }, { 0.1, 1 } },
+})
+
+hl.animation({ leaf = "global", enabled = true, speed = 10, bezier = "default" })
+hl.animation({ leaf = "border", enabled = true, speed = 5.39, bezier = "easeOutQuint" })
+hl.animation({ leaf = "windows", enabled = true, speed = 4.79, bezier = "easeOutQuint" })
+hl.animation({ leaf = "windowsIn", enabled = true, speed = 4.1, bezier = "easeOutQuint", style = "popin 87%" })
+hl.animation({ leaf = "windowsOut", enabled = true, speed = 1.49, bezier = "linear", style = "popin 87%" })
+hl.animation({ leaf = "fadeIn", enabled = true, speed = 1.73, bezier = "almostLinear" })
+hl.animation({ leaf = "fadeOut", enabled = true, speed = 1.46, bezier = "almostLinear" })
+hl.animation({ leaf = "fade", enabled = true, speed = 3.03, bezier = "quick" })
+hl.animation({ leaf = "layers", enabled = true, speed = 3.81, bezier = "easeOutQuint" })
+hl.animation({ leaf = "layersIn", enabled = true, speed = 4, bezier = "easeOutQuint", style = "fade" })
+hl.animation({ leaf = "layersOut", enabled = true, speed = 1.5, bezier = "linear", style = "fade" })
+hl.animation({ leaf = "fadeLayersIn", enabled = true, speed = 1.79, bezier = "almostLinear" })
+hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 1.39, bezier = "almostLinear" })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
+hl.animation({ leaf = "workspacesIn", enabled = true, speed = 1.21, bezier = "almostLinear", style = "fade" })
+hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
+
+hl.device({
+    name = "epic-mouse-v1",
+    sensitivity = -0.5,
+})
+
+
+local mainMod = "SUPER"
+
+hl.bind(mainMod .. " + " .. "8", hl.dsp.exec_cmd("kitty zsh -ic 'nv; exec zsh'"))
+hl.bind(mainMod .. " + " .. "C", hl.dsp.exec_cmd("flatpak run app.zen_browser.zen --new-window https://www.southpark.lat/seasons/south-park"))
+hl.bind(mainMod .. " + " .. "F", hl.dsp.exec_cmd("kitty zsh -ic 'bai; exec zsh'"))
+hl.bind(mainMod .. " + " .. "RETURN", hl.dsp.exec_cmd("kitty zsh -ic 'hpr; exec zsh'"))
+hl.bind(mainMod .. " + " .. "Q", hl.dsp.exec_cmd(terminal))
+hl.bind(mainMod .. " + " .. "W", hl.dsp.window.close())
+hl.bind(mainMod .. " + " .. "E", hl.dsp.exec_cmd(fileManager))
+hl.bind(mainMod .. " + " .. "J", hl.dsp.window.resize({ x = 500, y = 350}))
+hl.bind(mainMod .. " + " .. "J", hl.dsp.window.center())
+hl.bind("SUPER + V", hl.dsp.window.resize({ x = 1275, y = 760 }))
+hl.bind("SUPER + V", hl.dsp.window.move({ x = 0, y = 0 }))
+hl.bind("SUPER + V", hl.dsp.window.center())
+hl.bind(mainMod .. " + " .. "D", hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. " + " .. "P", hl.dsp.window.pin())
+--hl.bind(mainMod .. " + " .. "A", hl.dsp.exec_cmd("firefox"))
+hl.bind(mainMod .. " + " .. "O",  hl.dsp.exec_cmd("okular"))
+-- Oculatar ventanas y reaparecerlas
+hl.bind(mainMod .. " + SHIFT + SPACE", hl.dsp.window.move({ workspace = "special:minimized" }))
+hl.bind(mainMod .. " + SPACE", hl.dsp.workspace.toggle_special("minimized"))
+
+hl.bind(mainMod .. " + Tab", function()
+    hl.dispatch(hl.dsp.window.cycle_next({ next = true }))
+    hl.dispatch(hl.dsp.window.bring_to_top())
+end)
+
+hl.bind(mainMod .. " + SHIFT + Tab", function()
+    hl.dispatch(hl.dsp.window.cycle_next({ next = false }))
+    hl.dispatch(hl.dsp.window.bring_to_top())
+end)
+
+hl.bind(mainMod .. " + " .. "Z", hl.dsp.exec_cmd("flatpak run app.zen_browser.zen"))
+-- Screenshots
+--hl.bind("SUPER + M", hl.dsp.exec_cmd("grim ~/Pictures/screenshot_$(date +%Y-%m-%d_%H-%M-%s).png"))
+--hl.bind("SUPER + SHIFT + M", hl.dsp.exec_cmd("grim -g \"$(slurp)\" ~/Pictures/screenshot_$(date +%Y-%m-%d_%H-%M-%s).png"))
+-- Windows size & resize
+hl.bind("SUPER + up", hl.dsp.window.resize({ x = 0, y = -40, relative = true }), { repeating = true })
+hl.bind("SUPER + down", hl.dsp.window.resize({ x = 0, y = 40, relative = true }), { repeating = true })
+hl.bind("SUPER + G", hl.dsp.window.center())
+hl.bind("SUPER + G", hl.dsp.window.resize({ x = 900, y = 750}))
+hl.bind("SUPER + N", hl.dsp.window.resize({ x = 400, y = 250}))
+hl.bind("SUPER + B", hl.dsp.window.move({ x = 4, y = 40 }))
+hl.bind("SUPER + SHIFT + B", hl.dsp.window.move({ x = 370, y = 40 }))
+hl.bind("F11", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
+-- Record video
+hl.bind("SUPER + SHIFT + L", hl.dsp.exec_cmd("pkill -SIGINT wf-recorder || wf-recorder -f ~/Videos/grabacion_$(date +%Y-%m-%d_%H-%M-%s).mp4"))
+-- Redimensionar solo horizontal
+hl.bind("SUPER + left", hl.dsp.window.resize({ x = -40, y = 0, relative = true }), { repeating = true })
+hl.bind("SUPER + right", hl.dsp.window.resize({ x = 40, y = 0, relative = true }), { repeating = true })
+-- Mover ventana con el teclado
+hl.bind("SUPER + SHIFT + bracketleft",  hl.dsp.window.move({ x = -40, y = 0,  relative = true }), { repeating = true })
+hl.bind("SUPER + SHIFT + bracketright", hl.dsp.window.move({ x = 40,  y = 0,  relative = true }), { repeating = true })
+hl.bind("SUPER + SHIFT + semicolon",    hl.dsp.window.move({ x = 0,   y = -40, relative = true }), { repeating = true })
+hl.bind("SUPER + SHIFT + apostrophe",   hl.dsp.window.move({ x = 0,   y = 40,  relative = true }), { repeating = true })
+
+-- Volumen de sonido
+hl.bind("F8", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 25%+"))
+hl.bind("F9", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 25%-"))
+hl.bind("F6", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
+
+-- Brillo de pantalla
+hl.bind(mainMod .. " + " .. "Y", hl.dsp.exec_cmd("brightnessctl s 5%+"))
+hl.bind(mainMod .. " + " .. "T", hl.dsp.exec_cmd("brightnessctl s 2%-"))
+hl.bind(mainMod .. " + " .. "X", hl.dsp.exec_cmd("brightnessctl s 1%-"))
+
+-- Switch workspaces with mainMod + [0-5]
+
+hl.bind(mainMod .. " + " .. 1, hl.dsp.focus({ workspace = 1 }))
+hl.bind(mainMod .. " + " .. 2, hl.dsp.focus({ workspace = 2 }))
+hl.bind(mainMod .. " + " .. 3, hl.dsp.focus({ workspace = 3 }))
+
+-- Move active window to a workspace with mainMod + SHIFT + [0-5]
+
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 1, hl.dsp.window.move({ workspace = 1 }))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 2, hl.dsp.window.move({ workspace = 2 }))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. 3, hl.dsp.window.move({ workspace = 3 }))
+
+-- Move/resize windows with mainMod + LMB/RMB and dragging
+
+hl.bind(mainMod .. " + " .. "mouse:272", hl.dsp.window.drag(), { mouse = true })
+hl.bind(mainMod .. " + " .. "mouse:273", hl.dsp.window.resize(), { mouse = true })
+
+-- Laptop multimedia keys for volume and LCD brightness
+
+-- Requires playerctl
+
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
+hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
+
+--## WINDOWS AND WORKSPACES ###
+
+-- Autostart
+hl.on("hyprland.start", function()
+    hl.exec_cmd("noctalia")
+    hl.exec_cmd("brightnessctl s 200")
+    hl.exec_cmd("nm-applet --indicator")
+    --hl.exec_cmd("waybar")
+    hl.exec_cmd("app.zen_browser.zen")
+    hl.exec_cmd("dunst")
+    hl.exec_cmd("hyprsunset -t 3000k")
+    --hl.exec_cmd("swaybg -i Pictures/bg/starry-skies-and-cozy-nights-ge-1920x1200.jpg")
+    hl.exec_cmd("sh -c 'UPPER_LIMIT=80; LOWER_LIMIT=20; while true; do LEVEL=$(cat /sys/class/power_supply/BAT0/capacity); STATUS=$(cat /sys/class/power_supply/BAT0/status); if [ \"$LEVEL\" -ge \"$UPPER_LIMIT\" ] && [ \"$STATUS\" = \"Charging\" ]; then dunstify -u critical -i battery-full-charged \"Batería al $LEVEL%\" \"Desconecta el cargador\"; elif [ \"$LEVEL\" -le \"$LOWER_LIMIT\" ] && [ \"$STATUS\" = \"Discharging\" ]; then dunstify -u critical -i battery-caution \"Batería Baja\" \"Nivel al $LEVEL%. Conecta el cargador\"; fi; sleep 120; done'")
+    hl.exec_cmd("bash -c 'while true; do bat_lvl=$(cat /sys/class/power_supply/BAT0/capacity); bat_st=$(cat /sys/class/power_supply/BAT0/status); if [ \"$bat_lvl\" -le 10 ] && [ \"$bat_st\" = \"Discharging\" ]; then notify-send -u critical \"Batería Baja\" \"Se te olvidó conectar el cargador\"; elif [ \"$bat_lvl\" -ge 90 ] && [ \"$bat_st\" = \"Charging\" ]; then notify-send -u normal \"Batería Llena\" \"Se te olvidó desconectar el cargador\"; fi; sleep 60; done'")
+    hl.exec_cmd("sleep $(( ( $(date -d \"20:00\" +%s) - $(date +%s)+ 86400 )% 86400 )) && dunstify \"Recordatorio\" \"Ya son las 8:00 PM\" -i clock")
+    hl.exec_cmd("sleep $(( ( $(date -d \"20:30\" +%s) - $(date +%s)+ 86400 )% 86400 )) && dunstify \"Recordatorio\" \"Ya son las 8:30 PM\" -i clock")
+end)
+
+hl.on("window.active", function(w)
+    hl.dispatch(hl.dsp.window.bring_to_top({ window = w }))
+end)        
