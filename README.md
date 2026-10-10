@@ -69,7 +69,7 @@ hwclock --systohc
 nvim /etc/locale.gen        # uncomment es_MX.UTF-8 UTF-8 y en_US.UTF-8 UTF-8
 locale-gen
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
-echo "KEYMAP=en_US.UTF-8" > /etc/vconsole.conf
+echo "KEYMAP=us" > /etc/vconsole.conf
 echo "host" > /etc/hostname
 passwd
 useradd -mG wheel username
@@ -85,6 +85,12 @@ umount -R /mnt
 reboot
 
 Remove the USB drive when it turns off.
+
+--------------------------------------------------------
+
+sudo pacman -Syu
+sudo pacman -S hyprland kitty neovim git base-devel mesa vulkan-intel intel-media-driver xdg-desktop-portal-hyprland pipewire pipewire-pulse wireplumber polkit-kde-agent qt5-wayland qt6-wayland ttf-jetbrains-mono-nerd wl-clipboard brightnessctl hyprsunset
+
 
 ` sudo pacman -S wayland hyprland cmake yay paru wget dunst efibootmgr kitty hyprlock dolphin keepass htop neovim vim waybar rofi gcc matrix sddm git wget fastfetch curl firefox vlc spectacle power-profiles-daemon cargo clany tmux gwenview base-devel android-tools ntfs-3g linux-headers exfatprogs hyprsunset`
 
