@@ -21,18 +21,17 @@ archinstall
 sudo pacman -Syu 
 sudo pacman -S mesa wayland hyprland hypaper ranger kitty dolphin blender gimp krita steam keepass htop neovim vim jdk waybar rofi jdk-openjdk gcc matrix sddm git code wget fastfetch curl firefox vlc spectacle power-profiles-daemon cargo clany tmux gwenview base-devel android-tools ntfs-3g linux-headers exfatprogs  # Install
 
---------------------------  
-
 Enable multilib
 Net config --->Network-Manager(default)
 kernel : linux
 swap: yes
-partitions default recommended
+partitions --> default recommended
 
--------------------------
 exit
 shutdown now
 
+------------------------------------------
+# Manual Installation (My favorite)
 
 
 
