@@ -33,11 +33,28 @@ shutdown now
 ------------------------------------------
 # Manual Installation (My favorite)
 
+lsblk ----> make sure you have enough space disk (500GB)
+gdisk /dev/nvme0n1p1
 
+press on ----> '?' for help info (in case of past partitions, delete it)
 
+press -----> n for aggregate partitions:
 
+EFI (the one you already started): Enter for first sector, +1G for last sector, code ef00.
+Swap: n, Enter (2), Enter, +8G (adjust based on your RAM), code 8200.
+Root: n, Enter (3), Enter, +50G, code 8300.
+Home: n, Enter (4), Enter, Enter (use all remaining space), code 8300.
 
+press ----> w & x to save & exit
 
+mkfs.fat -F32 /dev/nvme0n1p1
+mkswap /dev/nvme0n1p2
+mkfs.ext4 /dev/nvme0n1p3
+mkfs.ext4 /dev/nvme0n1p4
+mount /dev/nvme0n1p3 /mnt
+mount --mkdir /dev/nvme0n1p1 /mnt/boot
+mount --mkdir /dev/nvme0n1p4 /mnt/home
+swapon /dev/nvme0n1p2
 
 
 
