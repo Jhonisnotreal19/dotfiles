@@ -25,6 +25,7 @@ hl.config({
     },
 })
 
+hl.permission({ binary = "/usr/bin/gpu-screen-recorder", type = "screencopy", mode = "allow" })
 hl.permission({ binary = "/usr/bin/noctalia", type = "screencopy", mode = "allow" })
 hl.permission({ binary = "/usr/bin/grim", type = "screencopy", mode = "allow" })
 hl.permission({ binary = "/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", type = "screencopy", mode = "allow" })
@@ -162,7 +163,7 @@ local mainMod = "SUPER"
 
 hl.bind(mainMod .. " + " .. "8", hl.dsp.exec_cmd("kitty zsh -ic 'nv; exec zsh'"))
 hl.bind(mainMod .. " + " .. "C", hl.dsp.exec_cmd("flatpak run app.zen_browser.zen --new-window https://www.southpark.lat/seasons/south-park"))
-hl.bind(mainMod .. " + " .. "F", hl.dsp.exec_cmd("kitty zsh -ic 'lai; exec zsh'"))
+hl.bind(mainMod .. " + " .. "F", hl.dsp.exec_cmd("kitty zsh -ic 'bai; exec zsh'"))
 hl.bind(mainMod .. " + " .. "RETURN", hl.dsp.exec_cmd("kitty zsh -ic 'hpr; exec zsh'"))
 hl.bind(mainMod .. " + " .. "Q", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + " .. "W", hl.dsp.window.close())
@@ -215,9 +216,9 @@ hl.bind("SUPER + SHIFT + semicolon",    hl.dsp.window.move({ x = 0,   y = -40, r
 hl.bind("SUPER + SHIFT + apostrophe",   hl.dsp.window.move({ x = 0,   y = 40,  relative = true }), { repeating = true })
 
 -- Volumen de sonido
-hl.bind(mainMod .. " + " .. "K", hl.dsp.exec_cmd("amixer set Master 25%+"))
-hl.bind(mainMod .. " + " .. "H", hl.dsp.exec_cmd("amixer set Master 25%-"))
-hl.bind(mainMod .. " + " .. "U", hl.dsp.exec_cmd("amixer set Master toggle")) -- Silenciar
+hl.bind("F8", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 25%+"))
+hl.bind("F9", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 25%-"))
+hl.bind("F6", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
 
 -- Brillo de pantalla
 hl.bind(mainMod .. " + " .. "Y", hl.dsp.exec_cmd("brightnessctl s 5%+"))
@@ -260,7 +261,7 @@ hl.on("hyprland.start", function()
     --hl.exec_cmd("waybar")
     hl.exec_cmd("app.zen_browser.zen")
     hl.exec_cmd("dunst")
-    hl.exec_cmd("hyprsunset -t 3000")
+    hl.exec_cmd("hyprsunset -t 3000k")
     --hl.exec_cmd("swaybg -i Pictures/bg/starry-skies-and-cozy-nights-ge-1920x1200.jpg")
     hl.exec_cmd("sh -c 'UPPER_LIMIT=80; LOWER_LIMIT=20; while true; do LEVEL=$(cat /sys/class/power_supply/BAT0/capacity); STATUS=$(cat /sys/class/power_supply/BAT0/status); if [ \"$LEVEL\" -ge \"$UPPER_LIMIT\" ] && [ \"$STATUS\" = \"Charging\" ]; then dunstify -u critical -i battery-full-charged \"Batería al $LEVEL%\" \"Desconecta el cargador\"; elif [ \"$LEVEL\" -le \"$LOWER_LIMIT\" ] && [ \"$STATUS\" = \"Discharging\" ]; then dunstify -u critical -i battery-caution \"Batería Baja\" \"Nivel al $LEVEL%. Conecta el cargador\"; fi; sleep 120; done'")
     hl.exec_cmd("bash -c 'while true; do bat_lvl=$(cat /sys/class/power_supply/BAT0/capacity); bat_st=$(cat /sys/class/power_supply/BAT0/status); if [ \"$bat_lvl\" -le 10 ] && [ \"$bat_st\" = \"Discharging\" ]; then notify-send -u critical \"Batería Baja\" \"Se te olvidó conectar el cargador\"; elif [ \"$bat_lvl\" -ge 90 ] && [ \"$bat_st\" = \"Charging\" ]; then notify-send -u normal \"Batería Llena\" \"Se te olvidó desconectar el cargador\"; fi; sleep 60; done'")

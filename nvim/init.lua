@@ -75,6 +75,10 @@ require("lazy").setup({
       },
     },
   },
+  {
+  "lambdalisue/suda.vim",
+  cmd = { "SudaRead", "SudaWrite" }, -- Carga el plugin solo cuando uses estos comandos
+},
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   { "neovim/nvim-lspconfig" },
   { "hrsh7th/nvim-cmp" },
@@ -99,7 +103,9 @@ vim.api.nvim_set_hl(0, "Comment", { fg = "#FFFFFF" })
 vim.opt.clipboard = "unnamedplus"
 
 -- Mapear Ctrl+C para copiar (en modo visual)
-vim.keymap.set("v", "<C-c>", '"+y', { noremap = true, silent = true })
+-- vim.keymap.set("v", "<C-c>", '"+y', { noremap = true, silent = true })
+-- Asegura que Ctrl+C en modo visual copie al portapapeles del sistema
+vim.keymap.set('v', '<C-c>', '"+y', { noremap = true, silent = true })
 
 -- Opcional: Ctrl+Shift+C también
 vim.keymap.set("v", "<C-S-c>", '"+y', { noremap = true, silent = true })

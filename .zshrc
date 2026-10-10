@@ -8,6 +8,7 @@ export PATH=$PATH:$SPARK_HOME/bin
 export PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.7-src.zip:$PYTHONPATH
 export PYSPARK_PYTHON=python3
 export PATH=$PATH:$JAVA_HOME/jre/bin
+export EDITOR=nvim
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
@@ -89,7 +90,7 @@ plugins=(
 	git
 	zsh-autosuggestions
 	aliases
-	chucknorris
+	#chucknorris
 	emoji-clock
 	emotty
 	codeclimate
@@ -148,7 +149,9 @@ alias last='find -mtime -1'
 alias update='sudo pacman -Syu'
 alias aupd='sudo pacman -Syyu'
 #alias upgrade='sudo apt upgrade'
-alias is='_ pacman -S '
+alias is='_ pacman -S --noconfirm'
+alias iy="yay -S --noconfirm"
+alias ip="paru -S --noconfirm"
 alias py='python3'
 alias z='nv .zshrc'
 alias hpr='nv .config/hypr/hyprland.lua'
