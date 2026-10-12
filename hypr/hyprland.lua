@@ -202,6 +202,7 @@ hl.bind("SUPER + G", hl.dsp.window.center())
 hl.bind("SUPER + G", hl.dsp.window.resize({ x = 900, y = 750}))
 hl.bind("SUPER + N", hl.dsp.window.resize({ x = 400, y = 250}))
 hl.bind("SUPER + B", hl.dsp.window.move({ x = 4, y = 40 }))
+hl.bind("SUPER + K", hl.dsp.window.move({ x = 750, y = 40 }))
 hl.bind("SUPER + SHIFT + B", hl.dsp.window.move({ x = 370, y = 40 }))
 hl.bind("F11", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 -- Record video
@@ -216,13 +217,13 @@ hl.bind("SUPER + SHIFT + semicolon",    hl.dsp.window.move({ x = 0,   y = -40, r
 hl.bind("SUPER + SHIFT + apostrophe",   hl.dsp.window.move({ x = 0,   y = 40,  relative = true }), { repeating = true })
 
 -- Volumen de sonido
-hl.bind("F8", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 25%+"))
-hl.bind("F9", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 25%-"))
+hl.bind("F9", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 25%+"))
+hl.bind("F8", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 25%-"))
 hl.bind("F6", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
 
 -- Brillo de pantalla
-hl.bind(mainMod .. " + " .. "Y", hl.dsp.exec_cmd("brightnessctl s 5%+"))
-hl.bind(mainMod .. " + " .. "T", hl.dsp.exec_cmd("brightnessctl s 2%-"))
+hl.bind("F10", hl.dsp.exec_cmd("brightnessctl s +5%"))
+hl.bind("F7", hl.dsp.exec_cmd("brightnessctl s 2%-"))
 hl.bind(mainMod .. " + " .. "X", hl.dsp.exec_cmd("brightnessctl s 1%-"))
 
 -- Switch workspaces with mainMod + [0-5]
