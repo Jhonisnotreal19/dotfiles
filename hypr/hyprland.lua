@@ -37,7 +37,7 @@ hl.window_rule({
     name  = "float_on_80",
     match = { class = ".*" },
     float = true,
-    size = { 900, 750 },
+    size = { 1900, 1200 },
     center = true,
 })
 
@@ -47,7 +47,7 @@ hl.window_rule({
         class = "^(kitty)$",
     },
     float = true,
-    size = { 500, 350 },
+    size = { 900, 750 },
     center = true,
 })
 
@@ -170,7 +170,7 @@ hl.bind(mainMod .. " + " .. "W", hl.dsp.window.close())
 hl.bind(mainMod .. " + " .. "E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + " .. "J", hl.dsp.window.resize({ x = 500, y = 350}))
 hl.bind(mainMod .. " + " .. "J", hl.dsp.window.center())
-hl.bind("SUPER + V", hl.dsp.window.resize({ x = 1275, y = 760 }))
+hl.bind("SUPER + V", hl.dsp.window.resize({ x = 1275, y = 770 }))
 hl.bind("SUPER + V", hl.dsp.window.move({ x = 0, y = 0 }))
 hl.bind("SUPER + V", hl.dsp.window.center())
 hl.bind(mainMod .. " + " .. "D", hl.dsp.exec_cmd(menu))

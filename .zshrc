@@ -149,9 +149,9 @@ alias last='find -mtime -1'
 alias update='sudo pacman -Syu'
 alias aupd='sudo pacman -Syyu'
 #alias upgrade='sudo apt upgrade'
-alias is='_ pacman -S --noconfirm'
-alias iy="yay -S --noconfirm"
-alias ip="paru -S --noconfirm"
+alias is='_ pacman -S'
+alias iy="yay -S"
+alias ip="paru -S"
 alias py='python3'
 alias z='nv .zshrc'
 alias hpr='nv .config/hypr/hyprland.lua'
@@ -185,6 +185,7 @@ alias reactivateCamera="sudo modprobe uvcvideo"
 alias packages="pacman -Qeq > pkglist.txt"
 alias mip="curl ipinfo.io"
 alias misbinds="hyprctl binds | grep -E '^\s*key:'"
+alias bai="ollama run maternion/minicpm5-heretic:2b"
 
 autoload -Uz calc
 
@@ -236,7 +237,8 @@ export PATH="$QLTY_INSTALL/bin:$PATH"
 # Esto resetea los colores pero mantiene las letras de colores, quitando el fondo (bg)
 export LS_COLORS='ow=01;34:di=01;34:pi=40;33:so=01;35:bd=40;33;01'
 # Prompt minimalista: solo un '>' (o '#' si eres root)
-PROMPT='%~ > '
+PROMPT='%~ 
+> '
 
 # Created by `pipx` on 2026-10-06 22:42:00
 export PATH="$PATH:/home/jhonisnotreal/.local/bin"
