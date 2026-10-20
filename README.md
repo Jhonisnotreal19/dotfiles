@@ -150,7 +150,7 @@ sudo timeshift-launcher
 
 ` sudo pacman -S audit lynis tetragon tracee rkhunter ufw aide exiftool `
 
-` flatpak install flathub app.zen_browser.zen `
+` flatpak install flathub app.zen_browser.zen elisa pinta`
 
 ` paru -S noctalia mpvpaper wlogout  `
 
@@ -163,3 +163,4 @@ sudo timeshift-launcher
 ` git clone https://aur.archlinux.org/yay.git `
 
 sddm:   https://github.com/Keyitdev/sddm-astronaut-theme
+grub:   https://github.com/VandalByte/dedsec-grub2-theme
