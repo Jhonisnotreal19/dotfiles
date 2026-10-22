@@ -13,9 +13,9 @@ local editor = "nvim"
 
 --## ENVIRONMENT VARIABLES ###
 
-hl.env("XCURSOR_SIZE", 24)
-hl.env("HYPRCURSOR_SIZE", 24)
-hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
+--hl.env("XCURSOR_SIZE", 24)
+--hl.env("HYPRCURSOR_SIZE", 24)
+--hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
 
 --## PERMISSIONS ###
 
@@ -24,6 +24,13 @@ hl.config({
         enforce_permissions = true,
     },
 })
+
+--Cursor
+hl.env("HYPRCURSOR_THEME", "Bibata-Modern-Classic")
+hl.env("HYPRCURSOR_SIZE", "32")
+hl.env("XCURSOR_THEME", "Bibata-Modern-Classic")
+hl.env("XCURSOR_SIZE", "32")
+
 
 hl.permission({ binary = "/usr/bin/gpu-screen-recorder", type = "screencopy", mode = "allow" })
 hl.permission({ binary = "/usr/bin/noctalia", type = "screencopy", mode = "allow" })
@@ -34,18 +41,15 @@ hl.permission({ binary = "/usr/(bin|local/bin)/hyprpm", type = "plugin", mode = 
 
 --## LOOK AND FEEL ###
 hl.window_rule({
-    name  = "float_on_80",
     match = { class = ".*" },
     float = true,
-    size = { 1900, 1200 },
+    size = { 1280, 770 },
     center = true,
 })
 
 hl.window_rule({
-    name  = "float_on_81",
-    match = {
-        class = "^(kitty)$",
-    },
+    name  = "kitty size",
+    match = {class = "^(kitty)$"},
     float = true,
     size = { 900, 750 },
     center = true,
@@ -63,7 +67,7 @@ hl.config({
     general = {
         gaps_in = 0,
         gaps_out = 0,
-        border_size = 1,
+        border_size = 0,
         resize_on_border = false,
         allow_tearing = false,
         layout = "master",
@@ -162,7 +166,7 @@ hl.device({
 local mainMod = "SUPER"
 
 hl.bind(mainMod .. " + " .. "8", hl.dsp.exec_cmd("kitty zsh -ic 'nv; exec zsh'"))
-hl.bind(mainMod .. " + " .. "C", hl.dsp.exec_cmd("flatpak run app.zen_browser.zen --new-window https://www.southpark.lat/seasons/south-park"))
+--hl.bind(mainMod .. " + " .. "C", hl.dsp.exec_cmd("flatpak run app.zen_browser.zen --new-window https://www.southpark.lat/seasons/south-park"))
 hl.bind(mainMod .. " + " .. "F", hl.dsp.exec_cmd("kitty zsh -ic 'bai; exec zsh'"))
 hl.bind(mainMod .. " + " .. "RETURN", hl.dsp.exec_cmd("kitty zsh -ic 'hpr; exec zsh'"))
 hl.bind(mainMod .. " + " .. "Q", hl.dsp.exec_cmd(terminal))
@@ -170,7 +174,7 @@ hl.bind(mainMod .. " + " .. "W", hl.dsp.window.close())
 hl.bind(mainMod .. " + " .. "E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + " .. "J", hl.dsp.window.resize({ x = 500, y = 350}))
 hl.bind(mainMod .. " + " .. "J", hl.dsp.window.center())
-hl.bind("SUPER + V", hl.dsp.window.resize({ x = 1275, y = 770 }))
+hl.bind("SUPER + V", hl.dsp.window.resize({ x = 1280, y = 770 }))
 hl.bind("SUPER + V", hl.dsp.window.move({ x = 0, y = 0 }))
 hl.bind("SUPER + V", hl.dsp.window.center())
 hl.bind(mainMod .. " + " .. "D", hl.dsp.exec_cmd(menu))
@@ -261,13 +265,18 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("nm-applet --indicator")
     --hl.exec_cmd("waybar")
     hl.exec_cmd("app.zen_browser.zen")
-    hl.exec_cmd("dunst")
+    hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+    hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY")
+    hl.exec_cmd("dunst -config ~/.config/dunst/dunstrc")
     hl.exec_cmd("hyprsunset -t 3000k")
     --hl.exec_cmd("swaybg -i Pictures/bg/starry-skies-and-cozy-nights-ge-1920x1200.jpg")
     hl.exec_cmd("sh -c 'UPPER_LIMIT=80; LOWER_LIMIT=20; while true; do LEVEL=$(cat /sys/class/power_supply/BAT0/capacity); STATUS=$(cat /sys/class/power_supply/BAT0/status); if [ \"$LEVEL\" -ge \"$UPPER_LIMIT\" ] && [ \"$STATUS\" = \"Charging\" ]; then dunstify -u critical -i battery-full-charged \"Batería al $LEVEL%\" \"Desconecta el cargador\"; elif [ \"$LEVEL\" -le \"$LOWER_LIMIT\" ] && [ \"$STATUS\" = \"Discharging\" ]; then dunstify -u critical -i battery-caution \"Batería Baja\" \"Nivel al $LEVEL%. Conecta el cargador\"; fi; sleep 120; done'")
     hl.exec_cmd("bash -c 'while true; do bat_lvl=$(cat /sys/class/power_supply/BAT0/capacity); bat_st=$(cat /sys/class/power_supply/BAT0/status); if [ \"$bat_lvl\" -le 10 ] && [ \"$bat_st\" = \"Discharging\" ]; then notify-send -u critical \"Batería Baja\" \"Se te olvidó conectar el cargador\"; elif [ \"$bat_lvl\" -ge 90 ] && [ \"$bat_st\" = \"Charging\" ]; then notify-send -u normal \"Batería Llena\" \"Se te olvidó desconectar el cargador\"; fi; sleep 60; done'")
     hl.exec_cmd("sleep $(( ( $(date -d \"20:00\" +%s) - $(date +%s)+ 86400 )% 86400 )) && dunstify \"Recordatorio\" \"Ya son las 8:00 PM\" -i clock")
     hl.exec_cmd("sleep $(( ( $(date -d \"20:30\" +%s) - $(date +%s)+ 86400 )% 86400 )) && dunstify \"Recordatorio\" \"Ya son las 8:30 PM\" -i clock")
+    hl.exec_cmd("gsettings set org.gnome.desktop.interface cursor-theme 'Bibata-Modern-Classic'")
+    hl.exec_cmd("gsettings set org.gnome.desktop.interface cursor-size 32")
+    hl.exec_cmd("sleep 5 && hyprctl setcursor Bibata-Modern-Classic 32")
 end)
 
 hl.on("window.active", function(w)

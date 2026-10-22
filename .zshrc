@@ -9,6 +9,7 @@ export PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.7-src.zip:
 export PYSPARK_PYTHON=python3
 export PATH=$PATH:$JAVA_HOME/jre/bin
 export EDITOR=nvim
+export PATH="$PATH:$(go env GOPATH)/bin"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
@@ -151,11 +152,11 @@ alias aupd='sudo pacman -Syyu'
 #alias upgrade='sudo apt upgrade'
 alias is='_ pacman -S'
 alias iy="yay -S"
-alias ip="paru -S"
+alias ipa="paru -S"
 alias py='python3'
 alias z='nv .zshrc'
 alias hpr='nv .config/hypr/hyprland.lua'
-alias matrix='unimatrix'
+alias matrix='unimatrix -c cyan'
 alias treee='tree -L 1'
 alias zen='flatpak run io.github.zen_browser.zen'
 alias battinfo='acpi -b'
@@ -242,3 +243,4 @@ PROMPT='%~
 
 # Created by `pipx` on 2026-10-06 22:42:00
 export PATH="$PATH:/home/jhonisnotreal/.local/bin"
+export PATH="$HOME/.cargo/bin:$PATH"

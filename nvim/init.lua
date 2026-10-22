@@ -29,6 +29,7 @@ vim.g.maplocalleader = " "
 vim.keymap.set("n", "<leader>w", ":w<CR>")
 vim.keymap.set("n", "<leader>q", ":q<CR>")
 vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>")
+vim.keymap.set("n", "<leader>th", ":below split | terminal<CR>", { desc = "Terminal horizontal abajo" })
 
 -- Instalar lazy.nvim automáticamente
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -106,6 +107,9 @@ vim.opt.clipboard = "unnamedplus"
 -- vim.keymap.set("v", "<C-c>", '"+y', { noremap = true, silent = true })
 -- Asegura que Ctrl+C en modo visual copie al portapapeles del sistema
 vim.keymap.set('v', '<C-c>', '"+y', { noremap = true, silent = true })
+
+-- Changing the color for keywords
+vim.api.nvim_set_hl(0, "Keyword", { fg = "#00ffff" })
 
 -- Opcional: Ctrl+Shift+C también
 vim.keymap.set("v", "<C-S-c>", '"+y', { noremap = true, silent = true })
